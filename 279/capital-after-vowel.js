@@ -10,7 +10,7 @@ const capitalAfterVowel = (str) => {
 				return char
 			} else {
 				if (capitalizeNextChar && consonants.includes(char)) {
-					//capitalizeNextChar = false
+					capitalizeNextChar = false
 					return char.toUpperCase()
 				} else {
 					return char
