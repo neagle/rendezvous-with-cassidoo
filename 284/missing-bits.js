@@ -4,15 +4,8 @@
  * values differ by exactly two, then insert the missing value. */
 
 const missingBits = (sequence) => {
-	const result = sequence.reduce((result, currentItem, currentIndex) => {
-		// Nothing to do for the first item
-		if (currentIndex === 0) {
-			result.push(currentItem)
-			return result
-		}
-
-		const previousItem = sequence[currentIndex - 1]
-		const difference = currentItem - previousItem
+	const result = sequence.reduce((result, currentItem) => {
+		const difference = currentItem - result.at(-1)
 
 		if (difference === 2) {
 			// Fill in the correct number
