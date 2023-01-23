@@ -3,14 +3,16 @@
  * show that that part has been truncated, and print it. If the consecutive
  * values differ by exactly two, then insert the missing value. */
 
+const MAX_DIFFERENCE = 2
+
 const missingBits = (sequence) => {
 	const result = sequence.reduce((result, currentItem) => {
 		const difference = currentItem - result.at(-1)
 
-		if (difference === 2) {
+		if (difference === MAX_DIFFERENCE) {
 			// Fill in the correct number
 			result.push(currentItem - 1)
-		} else if (difference > 2) {
+		} else if (difference > MAX_DIFFERENCE) {
 			result.push("...")
 		}
 
