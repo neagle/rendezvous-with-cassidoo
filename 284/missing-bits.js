@@ -9,9 +9,11 @@ const missingBits = (sequence) => {
 	const result = sequence.reduce((result, currentItem) => {
 		const difference = currentItem - result.at(-1)
 
-		if (difference === MAX_DIFFERENCE) {
-			// Fill in the correct number
-			result.push(currentItem - 1)
+		if (difference <= MAX_DIFFERENCE) {
+			// Fill in the numbers in between
+			for (let i = result.at(-1) + 1; i < currentItem; i += 1) {
+				result.push(i)
+			}
 		} else if (difference > MAX_DIFFERENCE) {
 			result.push("...")
 		}
