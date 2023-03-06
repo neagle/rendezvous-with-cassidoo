@@ -5,34 +5,26 @@ const scramble = (str) => {
 			.split(/([^A-Za-z])/)
 			// Iterate through each word
 			.map((word) => {
-				// Create a register to preserve a record of which letters were originally capitalized.
-				// We want "The" to turn into "Het", not "heT", since the intention is
-				// to have scrambled words that still read like English. It will also
-				// preserve things that are in all caps in case one wants to write words
-				// that are EMPHASIZED!
-				const originalCapitalization = []
-
 				// Check whether the string is a word, since the array will be a mix of
 				// letter sequences and punctuation / spaces.
 				const isWord = /^[A-Za-z]*$/.test(word)
 
 				return isWord && word.length > 3
 					? word
-							.split("")
-							.map((letter) => {
-								// Save whether the original letter in this slot is capitalized
-								originalCapitalization.push(/[A-Z]/.test(letter))
-								return letter
-							})
-							// Randomly sort the array of letters using a coin flip. Good
-							// randomization is, of course, harder than this, but this is good
-							// enough for this case.
-							.sort((a, b) => (Math.random() > 0.5 ? 1 : -1))
-							// Apply the original capitalization sequence to the newly scrambled word
-							.map((letter, i) =>
-								originalCapitalization[i]
-									? letter.toUpperCase()
-									: letter.toLowerCase()
+							// Split the word into an array with the first, middle, and last letters separated
+							.split(/(^[A-Za-z]|[A-Za-z]$)/)
+							// Drop the empty first/last values
+							.filter(Boolean)
+							.map((letters, i) =>
+								i === 1
+									? // Randomly sort the middle array of letters using a coin flip. Good
+									  // randomization is, of course, harder than this, but this is good
+									  // enough for this case.
+									  letters
+											.split("")
+											.sort(() => (Math.random() > 0.5 ? 1 : -1))
+											.join("")
+									: letters
 							)
 							.join("")
 					: // For punctuation and spaces, don't do anything
@@ -50,9 +42,9 @@ const inputs = [
 	"The school board is EXTREMELY disappointed in you, Thomas!",
 ]
 
-// inputs.forEach((input) => {
-// 	console.log("input", input)
-// 	console.log("scramble(input)", scramble(input))
-// })
+inputs.forEach((input) => {
+	console.log("input", input)
+	console.log("scramble(input)", scramble(input))
+})
 
 module.exports = scramble
