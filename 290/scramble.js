@@ -17,12 +17,23 @@ const scramble = (str) => {
 							.filter(Boolean)
 							.map((letters, i) =>
 								i === 1
-									? // Randomly sort the middle array of letters using a coin flip. Good
-									  // randomization is, of course, harder than this, but this is good
-									  // enough for this case.
-									  letters
+									? letters
 											.split("")
-											.sort(() => (Math.random() > 0.5 ? 1 : -1))
+											// Scramble the interior letters using an inline
+											// implementation of the Fisher-Yates Shuffle
+											.reduce((scrambled, letter, index, original) => {
+												if (Array.isArray(scrambled)) {
+													scrambled = { arr: [], hat: [...original] }
+												}
+
+												const pick = Math.floor(
+													Math.random() * scrambled.hat.length
+												)
+
+												scrambled.arr.push(...scrambled.hat.splice(pick, 1))
+
+												return scrambled.hat.length ? scrambled : scrambled.arr
+											}, [])
 											.join("")
 									: letters
 							)
