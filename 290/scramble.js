@@ -1,5 +1,3 @@
-// Given a list of numbers, return all groups of repeating consecutive numbers.
-
 const scramble = (str) => {
 	return (
 		str
