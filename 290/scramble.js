@@ -16,7 +16,7 @@ const scramble = (str) => {
 				// letter sequences and punctuation / spaces.
 				const isWord = /^[A-Za-z]*$/.test(word)
 
-				return isWord
+				return isWord && word.length > 3
 					? word
 							.split("")
 							.map((letter) => {
@@ -47,6 +47,7 @@ const inputs = [
 	"I came, I saw, I conquered.",
 	"To sit in solemn silence in a dull dark dock in a pestilential prison with a lifelong lock.",
 	"I am the very model of a modern major general.",
+	"The school board is EXTREMELY disappointed in you, Thomas!",
 ]
 
 // inputs.forEach((input) => {
