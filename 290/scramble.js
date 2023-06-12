@@ -12,6 +12,7 @@ const scramble = (str) => {
 				return isWord && word.length > 3
 					? word
 							// Split the word into an array with the first, middle, and last letters separated
+							// i.e. 'string' -> ['s', 'trin', 'g']
 							.split(/(^[A-Za-z]|[A-Za-z]$)/)
 							// Drop the empty first/last values
 							.filter(Boolean)
@@ -54,8 +55,8 @@ const inputs = [
 ]
 
 inputs.forEach((input) => {
-	console.log("input", input)
-	console.log("scramble(input)", scramble(input))
+	// console.log("input", input)
+	// console.log("scramble(input)", scramble(input))
 })
 
 module.exports = scramble
